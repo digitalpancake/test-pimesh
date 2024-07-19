@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("daemon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+055c4e424b35bfbe86018146bea5b6ddc25396f0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+59a7e3027d244c15d060059c7e18163df1f86557")]
 [assembly: System.Reflection.AssemblyProductAttribute("daemon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("daemon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

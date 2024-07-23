@@ -3,6 +3,7 @@ use actix_web::{App, HttpServer};
 mod db;
 mod log;
 mod endpoints;
+mod user;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {

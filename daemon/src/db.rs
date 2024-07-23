@@ -1,7 +1,7 @@
 use rusqlite::{Connection, Result};
 use std::{ops::Not, path::Path, process::exit};
 
-const DB_PATH: &'static str = "/etc/pimesh/db.db";
+pub const DB_PATH: &'static str = "/etc/pimesh/db.db";
 
 pub fn create_db() -> Result<()> {
     Path::new("/etc/pimesh")
@@ -17,16 +17,6 @@ pub fn create_db() -> Result<()> {
 
     let _ = std::fs::remove_file(DB_PATH);
     let conn = Connection::open(DB_PATH)?;
-
-    conn.execute(
-        "CREATE TABLE User (
-            id INTEGER PRIMARY KEY,
-            creation_datetime DateTime
-            username varchar(30) NOT NULL,
-            password varchar(30) NOT NULL
-        )",
-        (),
-    )?;
 
     conn.execute(
         "CREATE TABLE UserLog (
@@ -45,6 +35,32 @@ pub fn create_db() -> Result<()> {
             datetime DateTime NOT NULL,
             log_type INT NOT NULL,
             data varchar(10)
+        )",
+        (),
+    )?;
+
+    conn.execute(
+        "CREATE TABLE User (
+            id INTEGER PRIMARY KEY,
+            username varchar(10) NOT NULL,
+            password varchar(10) NOT NULL
+        )",
+        (),
+    )?;
+
+    conn.execute(
+        "CREATE TABLE [Group] (
+            group_name varchar(10) PRIMARY KEY
+        )",
+        (),
+    )?;
+
+    conn.execute(
+        "CREATE TABLE UserGroup (
+            group_name varchar(10) NOT NULL,
+            user_id int NOT NULL,
+            FOREIGN KEY (group_name) REFERENCES [Group](group_name),
+            FOREIGN KEY (user_id) REFERENCES User(id)
         )",
         (),
     )?;

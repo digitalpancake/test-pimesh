@@ -1,0 +1,13 @@
+{
+    "id": "int",
+    "user_id": "int",
+    "datetime": "datetime",
+    "log_type": "int",
+    "data": "string"
+},
+{
+    "id": "int",
+    "datetime": "datetime",
+    "log_type": "int",
+    "data": "string"
+}

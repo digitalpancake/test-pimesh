@@ -8,7 +8,7 @@ pub struct User {
     pub password: String,
 }
 
-pub fn get_user(username: String) -> Result<()> {
+pub fn get_user(username: String) -> Result<u8> {
     let conn = Connection::open(db::DB_PATH)?;
 
     let mut stmt = conn.prepare("select count(*) from User where username = ?1")?;
@@ -17,8 +17,8 @@ pub fn get_user(username: String) -> Result<()> {
 
     let _ = num.map(|_| {
         println!("Found user");
-        Ok(())
+        Ok(1)
     });
 
-    Ok(())
+    Ok(0)
 }

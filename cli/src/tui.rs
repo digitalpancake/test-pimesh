@@ -9,13 +9,13 @@ use ratatui::{
     widgets::Paragraph,
     Terminal,
 };
-use std::io::{stdout, Result};
+use std::io::{stdout, Result, Stdout};
+
+pub type Tui = Terminal<CrosstermBackend<Stdout>>;
 
 pub fn run_tui() -> Result<()> {
-    stdout().execute(EnterAlternateScreen)?;
-    enable_raw_mode()?;
-    let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
-    terminal.clear()?;
+
+    let mut terminal = tui_init()?;
 
     loop {
         terminal.draw(|frame| {
@@ -37,7 +37,17 @@ pub fn run_tui() -> Result<()> {
         }
     }
 
+    // Cleanup
+
     stdout().execute(LeaveAlternateScreen)?;
     disable_raw_mode()?;
     Ok(())
+}
+
+fn tui_init() -> Result<Tui> {
+    stdout().execute(EnterAlternateScreen)?;
+    enable_raw_mode()?;
+    let mut terminal = Terminal::new(CrosstermBackend::new(stdout()))?;
+    terminal.clear()?;
+    Ok(terminal)
 }

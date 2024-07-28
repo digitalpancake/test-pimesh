@@ -1,4 +1,3 @@
 REMOVE DELETE DB in rust script
 
-CLI - design
-
+CLI - design / CLAP

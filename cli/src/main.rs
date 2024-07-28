@@ -5,6 +5,7 @@ use debug::DebugLevel;
 mod db;
 mod debug;
 mod tui;
+mod app;
 
 #[derive(Parser)]
 #[command(
@@ -42,14 +43,11 @@ fn main() {
         None => {}
     }
 
-
     let res = tui::run_tui();
+
     if let Err(e) = res {
         println!("Error running TUI: {e}");
     }
-
-
-    // Should be cli ( ratatui )
 
 }
 

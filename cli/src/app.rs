@@ -18,11 +18,13 @@ use ratatui::{
 #[derive(Debug, Default)]
 pub struct App {
     selected: u8,
+    select_length: u8,
     exit: bool,
 }
 
 impl App {
     pub fn run(&mut self, terminal: &mut tui::Tui) -> io::Result<()> {
+        self.select_length = 255;
         while !self.exit {
             terminal.draw(|frame| self.render_frame(frame))?;
             self.handle_events()?;
@@ -58,10 +60,14 @@ impl App {
     }
 
     fn select_next(&mut self) {
-        self.selected += 1
+        if self.selected < self.select_length - 1 {
+            self.selected += 1
+        }
     }
     fn select_prev(&mut self) {
-        self.selected -= 1
+        if self.selected > 1 {
+            self.selected -= 1
+        }
     }
 
 
